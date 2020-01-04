@@ -11,6 +11,10 @@ $tmsObj = new TrueMarketSentiment('true-market-sentiment.txt');
 $dataArrTMS = $tmsObj->getChartDataForTrueMarketSentiment();
 $dataTMSStatus = $tmsObj->getTrueMarketSentimentStatus();
 
+// echo "<pre>";
+// print_r($tmsObj->getTrueMarketSentiment());
+// echo "</pre>";
+
 $dataPointsVol = $volumeTradeReviewObj->getChartDataForVolumeDistribution();
 $dataPointsTrade = $volumeTradeReviewObj->getChartDataForTradeDistribution();
 $dataArrBuySellMid = $volumeTradeReviewObj->getChartDataForBuyUpSellDownMidPriceDistribution();
@@ -216,8 +220,8 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
 <body style="background: white;">
 <div id="container">
     <div id="div1">
-        <div id="chartContainerTrade" style="height: 800px; width: 49.5%; float: left;"></div>
-        <div id="chartContainerVol" style="height: 800px; width: 49.5%; float: right;"></div>
+        <div id="chartContainerTrade" style="height: 1000px; width: 49.5%; float: left;"></div>
+        <div id="chartContainerVol" style="height: 1000px; width: 49.5%; float: right;"></div>
     </div>
 
     <div id="div2" style="clear: both;">
