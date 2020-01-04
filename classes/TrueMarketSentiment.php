@@ -217,7 +217,7 @@ final class TrueMarketSentiment
         $status = 'BEARISH';
         $stats = $this->getStats();
 
-        if ($stats['numBrokersGreenBar'] > 5 && $stats['numHigherBuyAvgThanSellAvg'] > 5) {
+        if ($stats['numBrokersGreenBar'] >= 5 && $stats['numHigherBuyAvgThanSellAvg'] >= 5) {
             $status = 'BULLISH';
         } else {
             if (
