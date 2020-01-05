@@ -20,6 +20,10 @@ final class TrueMarketSentiment
 
     CONST WEIGHT = 4;
 
+    CONST STAT_TRUE = 'true';
+
+    CONST STAT_FALSE = 'false';
+
     /**
      * @var $dataArr
      */
@@ -215,15 +219,15 @@ final class TrueMarketSentiment
 
             $data[$broker] = [
                 'buying_average' => $buyingAverage,
-                'buying_value' => $buyingValue,
-                'net_value' => $netValue,
                 'selling_average' => $sellingAverage,
+                'buying_value' => $buyingValue,
                 'selling_value' => $sellingValue,
+                'net_value' => $netValue,
                 'total_value' => $totalValue,
                 'stats' => [
-                    'is_green_candle' => ($netValue > 0) ? 'true' : 'false',
-                    'is_higher_buy_avg_than_sell_avg' => ($buyingAverage > $sellingAverage) ? 'true' : 'false',
-                    'is_less_buy_avg_than_sell_avg' => ($buyingAverage < $sellingAverage) ? 'true' : 'false'
+                    'is_green_candle' => ($netValue > 0) ? self::STAT_TRUE : self::STAT_FALSE,
+                    'is_higher_buy_avg_than_sell_avg' => ($buyingAverage > $sellingAverage) ? self::STAT_TRUE : self::STAT_FALSE,
+                    'is_less_buy_avg_than_sell_avg' => ($buyingAverage < $sellingAverage) ? self::STAT_TRUE : self::STAT_FALSE
                 ]
             ];
         }
@@ -244,7 +248,7 @@ final class TrueMarketSentiment
         if ($stats['numBrokersGreenBar'] > 5 && $stats['numHigherBuyAvgThanSellAvg'] > 5) {
             $status = self::STATUS_BULLISH;
         } elseif (
-            ($stats['numBrokersGreenBar'] === 5 && $stats['numHigherBuyAvgThanSellAvg'] === 5) ||
+            ($stats['numBrokersGreenBar'] >= 5 && $stats['numHigherBuyAvgThanSellAvg'] >= 5) ||
             ($stats['numBrokersGreenBar'] > 5 && $stats['numHigherBuyAvgThanSellAvg'] < 5) ||
             ($stats['numBrokersGreenBar'] < 5 && $stats['numHigherBuyAvgThanSellAvg'] > 5)
         ) {

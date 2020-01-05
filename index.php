@@ -37,6 +37,7 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
                 backgroundColor: "#0A2466",
                 animationEnabled: true,
                 exportEnabled: true,
+                zoomEnabled: true,
                 title:{
                     text: "Volume Distribution",
                     fontSize: 16,
@@ -70,6 +71,7 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
                 backgroundColor: "#0A2466",
                 animationEnabled: true,
                 exportEnabled: true,
+                zoomEnabled: true,
                 title:{
                     text: "Trade Distribution",
                     fontSize: 16,
@@ -103,6 +105,7 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
                 backgroundColor: "#0A2466",
                 animationEnabled: true,
                 exportEnabled: true,
+                zoomEnabled: true,
                 theme: "light1", // "light1", "light2", "dark1", "dark2"
                 title:{
                     text: "Buy Up, Mid Price and Sell Distribution (Volume)",
@@ -151,7 +154,9 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
 
             var chartTMS = new CanvasJS.Chart("chartContainerTMS", {
                 backgroundColor: "#0A2466",
+                dataPointWidth: 100,
                 exportEnabled: true,
+                zoomEnabled: true,
                 title: {
                     text: "True Market Sentiment - <?php echo $dataTMSStatus; ?>",
                     fontSize: 16,
@@ -164,6 +169,7 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
                     reversed: true
                 },
                 axisX:{
+                    labelAutoFit: true,
                     interval: 1,
                     labelFontSize: 12,
                     labelFontColor: "white"
@@ -221,7 +227,7 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
     </div>
 
     <div id="div2" style="clear: both;">
-        <div id="chartContainerTMS" style="height: 300px; width: 100%;"></div>
+        <div id="chartContainerTMS" style="height: 400px; width: 100%;"></div>
     </div>
 </div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
