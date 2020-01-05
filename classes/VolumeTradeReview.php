@@ -267,7 +267,7 @@ final class VolumeTradeReview
      */
     private function getDataFromFile($filename)
     {
-        $filePointer = fopen($filename, 'r');
+        $filePointer = fopen($filename, 'rb');
         while (!feof($filePointer)) {
             $line = fgets($filePointer, 2048);
 

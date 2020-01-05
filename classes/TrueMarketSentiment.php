@@ -130,10 +130,9 @@ final class TrueMarketSentiment
      */
     public function getStats()
     {
-        $data = [];
         $numBrokersGreenBar = 0;
-        $numHigherBuyAvgThanSellAvg = 0;
-        $numLessBuyAvgThanSellAvg = 0;
+        $nmHighBuyAvgThnSell = 0;
+        $nmLessBuyAvgThnSell = 0;
         $brokersSentiment = array_slice($this->getTrueMarketSentiment(), 0, self::MAX_NUM_BROKERS);
         foreach ($brokersSentiment as $broker => $brokerData) {
             if ($brokerData['net_value'] > 0) {
@@ -141,15 +140,15 @@ final class TrueMarketSentiment
             }
 
             if ($brokerData['buying_average'] > $brokerData['selling_average']) {
-                $numHigherBuyAvgThanSellAvg++;
+                $nmHighBuyAvgThnSell++;
             } else {
-                $numLessBuyAvgThanSellAvg++;
+                $nmLessBuyAvgThnSell++;
             }
         }
 
         $this->numBrokersGreenBar = $numBrokersGreenBar;
-        $this->numHigherBuyAvgThanSellAvg = $numHigherBuyAvgThanSellAvg;
-        $this->numLessBuyAvgThanSellAvg = $numLessBuyAvgThanSellAvg;
+        $this->numHigherBuyAvgThanSellAvg = $nmHighBuyAvgThnSell;
+        $this->numLessBuyAvgThanSellAvg = $nmLessBuyAvgThnSell;
 
         $data = [
             'numBrokersGreenBar' => $this->numBrokersGreenBar,
@@ -198,7 +197,7 @@ final class TrueMarketSentiment
             $buyingValue = 0;
             if (array_key_exists($broker, $this->dataArr['buyers'])) {
                 $buyingAverage = $this->dataArr['buyers'][$broker][self::AVERAGE];
-                $buyingValue = $this->convertIntWithCommatoIntWithNoComma(
+                $buyingValue = $this->convertIntWithCommaToIntWithNoComma(
                     $this->dataArr['buyers'][$broker][self::VALUE]
                 );
             }
@@ -207,7 +206,7 @@ final class TrueMarketSentiment
             $sellingValue = 0;
             if (array_key_exists($broker, $this->dataArr['sellers'])) {
                 $sellingAverage = $this->dataArr['sellers'][$broker][self::AVERAGE];
-                $sellingValue = $this->convertIntWithCommatoIntWithNoComma(
+                $sellingValue = $this->convertIntWithCommaToIntWithNoComma(
                     $this->dataArr['sellers'][$broker][self::VALUE]
                 );
             }
@@ -276,7 +275,7 @@ final class TrueMarketSentiment
      *
      * @return int
      */
-    private function convertIntWithCommatoIntWithNoComma($value)
+    private function convertIntWithCommaToIntWithNoComma($value)
     {
         return (int)str_replace(',', '', $value);
     }
@@ -290,7 +289,7 @@ final class TrueMarketSentiment
      */
     private function getDataFromFile($filename)
     {
-        $filePointer = fopen($filename, 'r');
+        $filePointer = fopen($filename, 'rb');
         $status = 'buyers';
         while (!feof($filePointer)) {
             $line = fgets($filePointer, 2048);
@@ -323,7 +322,7 @@ final class TrueMarketSentiment
         $total = 0;
         $data = $this->getData();
         foreach ($data[$status] as $keyData) {
-            $total += $this->convertIntWithCommatoIntWithNoComma($keyData[$key]);
+            $total += $this->convertIntWithCommaToIntWithNoComma($keyData[$key]);
         }
 
         return $total;
@@ -341,13 +340,13 @@ final class TrueMarketSentiment
         $buyerValue = 0;
         $sellerValue = 0;
         if (array_key_exists($broker, $this->dataArr['buyers'])) {
-            $buyerValue = $this->convertIntWithCommatoIntWithNoComma(
+            $buyerValue = $this->convertIntWithCommaToIntWithNoComma(
                 $this->dataArr['buyers'][$broker][self::VALUE]
             );
         }
 
         if (array_key_exists($broker, $this->dataArr['sellers'])) {
-            $sellerValue = $this->convertIntWithCommatoIntWithNoComma(
+            $sellerValue = $this->convertIntWithCommaToIntWithNoComma(
                 $this->dataArr['sellers'][$broker][self::VALUE]
             );
         }
