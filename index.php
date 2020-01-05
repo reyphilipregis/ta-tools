@@ -11,10 +11,6 @@ $tmsObj = new TrueMarketSentiment('true-market-sentiment.txt');
 $dataArrTMS = $tmsObj->getChartDataForTrueMarketSentiment();
 $dataTMSStatus = $tmsObj->getTrueMarketSentimentStatus();
 
-// echo "<pre>";
-// print_r($tmsObj->getTrueMarketSentiment());
-// echo "</pre>";
-
 $dataPointsVol = $volumeTradeReviewObj->getChartDataForVolumeDistribution();
 $dataPointsTrade = $volumeTradeReviewObj->getChartDataForTradeDistribution();
 $dataArrBuySellMid = $volumeTradeReviewObj->getChartDataForBuyUpSellDownMidPriceDistribution();

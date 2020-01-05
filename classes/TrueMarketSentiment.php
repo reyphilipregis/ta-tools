@@ -214,14 +214,10 @@ final class TrueMarketSentiment
      */
     public function getTrueMarketSentimentStatus()
     {
-        $status = 'BEARISH';
+        $status = 'NEUTRAL';
         $stats = $this->getStats();
 
-        echo "<pre>";
-        print_r($stats);
-        echo "</pre>";
-
-        if ($stats['numBrokersGreenBar'] >= 5 && $stats['numHigherBuyAvgThanSellAvg'] >= 5) {
+        if ($stats['numBrokersGreenBar'] > 5 && $stats['numHigherBuyAvgThanSellAvg'] > 5) {
             $status = 'BULLISH';
         } else {
             if (
