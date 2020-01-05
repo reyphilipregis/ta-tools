@@ -6,6 +6,14 @@ final class TrueMarketSentiment
 
     CONST BUYERS = 0;
 
+    CONST MAX_NUM_BROKERS = 10;
+
+    CONST STATUS_BEARISH = 'BEARISH';
+
+    CONST STATUS_BULLISH = 'BULLISH';
+
+    CONST STATUS_NEUTRAL = 'NEUTRAL';
+
     CONST VALUE = 2;
 
     CONST VOLUME = 1;
@@ -43,6 +51,23 @@ final class TrueMarketSentiment
     }
 
     /**
+     * Get's all the brokers from both buyers and sellers.
+     *
+     * @return mixed[]
+     */
+    public function getAllBrokers()
+    {
+        $brokers = array_keys(
+            array_merge(
+                $this->dataArr['buyers'],
+                $this->dataArr['sellers']
+            )
+        );
+
+        return $brokers;
+    }
+
+    /**
      * Get all the brokers with the total value (buyer + seller value).
      * Sorted in total value descending order.
      *
@@ -69,7 +94,7 @@ final class TrueMarketSentiment
     {
         $counter = 0;
         $data = [];
-        $top10BrokersTMS = array_slice($this->getTrueMarketSentiment(), 0, 10);
+        $top10BrokersTMS = array_slice($this->getTrueMarketSentiment(), 0, self::MAX_NUM_BROKERS);
         foreach ($top10BrokersTMS as $broker => $arrData) {
             $data['net_value'][$counter] = [
                 'color' => ($arrData['net_value'] > 0) ? '#66A360' : '#DD4A47',
@@ -109,7 +134,7 @@ final class TrueMarketSentiment
         $numBrokersGreenBar = 0;
         $numHigherBuyAvgThanSellAvg = 0;
         $numLessBuyAvgThanSellAvg = 0;
-        $brokersSentiment = array_slice($this->getTrueMarketSentiment(), 0, 10);
+        $brokersSentiment = array_slice($this->getTrueMarketSentiment(), 0, self::MAX_NUM_BROKERS);
         foreach ($brokersSentiment as $broker => $brokerData) {
             if ($brokerData['net_value'] > 0) {
                 $numBrokersGreenBar++;
@@ -167,7 +192,7 @@ final class TrueMarketSentiment
     public function getTrueMarketSentiment()
     {
         $data = [];
-        $brokers = array_slice($this->getAllBrokersWithTotalValue(), 0, 10);
+        $brokers = array_slice($this->getAllBrokersWithTotalValue(), 0, self::MAX_NUM_BROKERS);
         foreach ($brokers as $broker => $totalValue) {
             $buyingAverage = 0;
             $buyingValue = 0;
@@ -214,23 +239,19 @@ final class TrueMarketSentiment
      */
     public function getTrueMarketSentimentStatus()
     {
-        $status = 'NEUTRAL';
+        $status = self::STATUS_NEUTRAL;
         $stats = $this->getStats();
 
         if ($stats['numBrokersGreenBar'] > 5 && $stats['numHigherBuyAvgThanSellAvg'] > 5) {
-            $status = 'BULLISH';
-        } else {
-            if (
-                ($stats['numBrokersGreenBar'] === 5 && $stats['numHigherBuyAvgThanSellAvg'] === 5) ||
-                ($stats['numBrokersGreenBar'] > 5 && $stats['numHigherBuyAvgThanSellAvg'] < 5) ||
-                ($stats['numBrokersGreenBar'] < 5 && $stats['numHigherBuyAvgThanSellAvg'] > 5)
-            ) {
-                $status = 'NEUTRAL';
-            } else {
-                if ($stats['numBrokersGreenBar'] < 5 && $stats['numHigherBuyAvgThanSellAvg'] < 5) {
-                    $status = 'BEARISH';
-                }
-            }
+            $status = self::STATUS_BULLISH;
+        } elseif (
+            ($stats['numBrokersGreenBar'] === 5 && $stats['numHigherBuyAvgThanSellAvg'] === 5) ||
+            ($stats['numBrokersGreenBar'] > 5 && $stats['numHigherBuyAvgThanSellAvg'] < 5) ||
+            ($stats['numBrokersGreenBar'] < 5 && $stats['numHigherBuyAvgThanSellAvg'] > 5)
+        ) {
+            $status = self::STATUS_NEUTRAL;
+        } elseif ($stats['numBrokersGreenBar'] < 5 && $stats['numHigherBuyAvgThanSellAvg'] < 5) {
+            $status = self::STATUS_BEARISH;
         }
 
         return $status;
@@ -258,23 +279,6 @@ final class TrueMarketSentiment
     private function convertIntWithCommatoIntWithNoComma($value)
     {
         return (int)str_replace(',', '', $value);
-    }
-
-    /**
-     * Get's all the brokers from both buyers and sellers.
-     *
-     * @return mixed[]
-     */
-    public function getAllBrokers()
-    {
-        $brokers = array_keys(
-            array_merge(
-                $this->dataArr['buyers'],
-                $this->dataArr['sellers']
-            )
-        );
-
-        return $brokers;
     }
 
     /**
