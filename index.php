@@ -10,6 +10,11 @@ $dataArr = $volumeTradeReviewObj->getData();
 $tmsObj = new TrueMarketSentiment('true-market-sentiment.txt');
 $dataArrTMS = $tmsObj->getChartDataForTrueMarketSentiment();
 $dataTMSStatus = $tmsObj->getTrueMarketSentimentStatus();
+$dataTMSBrokersStats = $tmsObj->getTrueMarketSentiment();
+
+echo "<pre>";
+print_r($dataTMSBrokersStats);
+echo "</pre>";
 
 $dataPointsVol = $volumeTradeReviewObj->getChartDataForVolumeDistribution();
 $dataPointsTrade = $volumeTradeReviewObj->getChartDataForTradeDistribution();
@@ -229,6 +234,70 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
     <div id="div2" style="clear: both;">
         <div id="chartContainerTMS" style="height: 400px; width: 100%;"></div>
     </div>
+    <table style="width:100%; margin-top:20px;" border=1px cellspacing=0px cellpadding=0px>
+    <tr>
+        <th>&nbsp;</th>
+        <?php
+            foreach($dataTMSBrokersStats as $broker => $stats) 
+            {
+                echo '<th>'.$broker.'</th>';
+            }
+        ?>
+    </tr>
+
+    <tr>
+        <td colspan=11>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td>Buying Average</td>
+        <?php
+            // buying average
+            foreach($dataTMSBrokersStats as $broker => $stats) 
+            {
+                echo '<td>'.$stats['buying_average'].'</td>';
+            }
+        ?>
+    </tr>
+
+    <tr>
+        <td>Selling Average</td>
+        <?php
+            // selling average
+            foreach($dataTMSBrokersStats as $broker => $stats) 
+            {
+                echo '<td>'.$stats['selling_average'].'</td>';
+            }
+        ?>
+    </tr>
+
+    <tr>
+        <td colspan=11>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td>Total Value</td>
+        <?php
+            // total value
+            foreach($dataTMSBrokersStats as $broker => $stats) 
+            {
+                echo '<td>'.number_format($stats['total_value']).'</td>';
+            }
+        ?>
+    </tr>
+
+    <tr>
+        <td>Net Value</td>
+        <?php
+            // net value
+            foreach($dataTMSBrokersStats as $broker => $stats) 
+            {
+                echo '<td>'.number_format($stats['net_value']).'</td>';
+            }
+        ?>
+    </tr>
+
+    </table>
 </div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
