@@ -14,15 +14,15 @@ final class TrueMarketSentiment
 
     CONST STATUS_NEUTRAL = 'NEUTRAL';
 
+    CONST STAT_FALSE = 'false';
+
+    CONST STAT_TRUE = 'true';
+
     CONST VALUE = 2;
 
     CONST VOLUME = 1;
 
     CONST WEIGHT = 4;
-
-    CONST STAT_TRUE = 'true';
-
-    CONST STAT_FALSE = 'false';
 
     /**
      * @var $dataArr
@@ -238,7 +238,7 @@ final class TrueMarketSentiment
     /**
      * Get the true market sentiment status.
      *
-     * @return string
+     * @return array
      */
     public function getTrueMarketSentimentStatus()
     {
@@ -257,7 +257,11 @@ final class TrueMarketSentiment
             $status = self::STATUS_BEARISH;
         }
 
-        return $status;
+        return [
+            'status'                            => $status,
+            'num_green_bar'                     => $stats['numBrokersGreenBar'],
+            'num_higher_buy_avg_than_sell_avg'  => $stats['numHigherBuyAvgThanSellAvg']
+        ];
     }
 
     /**

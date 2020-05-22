@@ -12,10 +12,6 @@ $dataArrTMS = $tmsObj->getChartDataForTrueMarketSentiment();
 $dataTMSStatus = $tmsObj->getTrueMarketSentimentStatus();
 $dataTMSBrokersStats = $tmsObj->getTrueMarketSentiment();
 
-echo "<pre>";
-print_r($dataTMSBrokersStats);
-echo "</pre>";
-
 $dataPointsVol = $volumeTradeReviewObj->getChartDataForVolumeDistribution();
 $dataPointsTrade = $volumeTradeReviewObj->getChartDataForTradeDistribution();
 $dataArrBuySellMid = $volumeTradeReviewObj->getChartDataForBuyUpSellDownMidPriceDistribution();
@@ -39,7 +35,7 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
         window.onload = function() {
 
             var chartVol = new CanvasJS.Chart("chartContainerVol", {
-                backgroundColor: "#0A2466",
+                backgroundColor: "#042439",
                 animationEnabled: true,
                 exportEnabled: true,
                 zoomEnabled: true,
@@ -57,7 +53,8 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
                     suffix:  "%",
                     labelFontSize: 12,
                     labelFontColor: "white",
-                    minimum: 0
+                    minimum: 0,
+                    gridThickness: 0
                 },
                 data: [{
                     type: "bar",
@@ -73,7 +70,7 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
             });
 
             var chartTrade = new CanvasJS.Chart("chartContainerTrade", {
-                backgroundColor: "#0A2466",
+                backgroundColor: "#042439",
                 animationEnabled: true,
                 exportEnabled: true,
                 zoomEnabled: true,
@@ -91,7 +88,8 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
                     suffix:  "%",
                     labelFontSize: 12,
                     labelFontColor: "white",
-                    minimum: 0
+                    minimum: 0,
+                    gridThickness: 0
                 },
                 data: [{
                     type: "bar",
@@ -107,7 +105,7 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
             });
 
             var chartBuyMidSell = new CanvasJS.Chart("chartContainerBuyMidSell", {
-                backgroundColor: "#0A2466",
+                backgroundColor: "#042439",
                 animationEnabled: true,
                 exportEnabled: true,
                 zoomEnabled: true,
@@ -158,12 +156,12 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
             });
 
             var chartTMS = new CanvasJS.Chart("chartContainerTMS", {
-                backgroundColor: "#0A2466",
+                backgroundColor: "#042439",
                 dataPointWidth: 100,
                 exportEnabled: true,
                 zoomEnabled: true,
                 title: {
-                    text: "True Market Sentiment - <?php echo $dataTMSStatus; ?>",
+                    text: "Market Sentiment - <?php echo $dataTMSStatus['status']; ?>",
                     fontSize: 16,
                     fontColor: "white",
                     margin: 30
@@ -186,7 +184,10 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
                     margin:0,
                     labelFormatter: function(e) {
                         return "";
-                    }
+                    },
+                    gridThickness: 0,
+                    tickLength: 0,
+                    lineThickness: 0
                 },
                 legend: {
                     fontColor: "white"
@@ -224,15 +225,15 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
         }
     </script>
 </head>
-<body style="background: white;">
+<body style="background:#DCD8BB;">
 <div id="container">
     <div id="div1">
-        <div id="chartContainerTrade" style="height: 1000px; width: 49.5%; float: left;"></div>
-        <div id="chartContainerVol" style="height: 1000px; width: 49.5%; float: right;"></div>
+        <div id="chartContainerTrade" style="height: 500px; width: 49.6%; float: left;"></div>
+        <div id="chartContainerVol" style="height: 500px; width: 49.6%; float: right;"></div>
     </div>
 
     <div id="div2" style="clear: both;">
-        <div id="chartContainerTMS" style="height: 400px; width: 100%;"></div>
+        <div id="chartContainerTMS" style="height: 350px; width: 100%;"></div>
     </div>
     <table style="width:100%; margin-top:20px;" border=1px cellspacing=0px cellpadding=0px>
     <tr>
@@ -298,6 +299,12 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
     </tr>
 
     </table>
+
+    <?php
+        echo "<pre>";
+        print_r($dataTMSStatus);
+        echo "</pre>";
+    ?>
 </div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
