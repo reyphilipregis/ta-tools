@@ -58,7 +58,7 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
                 },
                 data: [{
                     type: "bar",
-                    color: "#FEB20B",
+                    color: "#A1D97D",
                     indexLabelFontSize: 12,
                     yValueFormatString: "##.#0 '%'",
                     indexLabel: "{y}",
@@ -93,7 +93,7 @@ $dataTMSNetValue = $dataArrTMS['net_value'];
                 },
                 data: [{
                     type: "bar",
-                    color: "#FEB20B",
+                    color: "#A1D97D",
                     indexLabelFontSize: 12,
                     yValueFormatString: "##.#0 '%'",
                     indexLabel: "{y}",
