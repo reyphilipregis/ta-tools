@@ -26,7 +26,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script>
+        <script type="text/javascript">
             window.onload = function() {
 
                 var chartTrade = new CanvasJS.Chart("chartContainerTrade", {
@@ -195,6 +195,6 @@
                 <div id="chartContainerTMS"></div>
             </div>
         </div>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script src="js/canvasjs.min.js"></script>
     </body>
 </html>
