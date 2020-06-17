@@ -1,311 +1,200 @@
 <?php
-error_reporting(E_ALL);
+    error_reporting(E_ALL);
 
-require __DIR__.'/classes/TrueMarketSentiment.php';
-require __DIR__.'/classes/VolumeTradeReview.php';
+    require __DIR__.'/classes/TrueMarketSentiment.php';
+    require __DIR__.'/classes/VolumeTradeReview.php';
 
-$volumeTradeReviewObj = new VolumeTradeReview('volume-trade-distribution.txt');
-$dataArr = $volumeTradeReviewObj->getData();
+    $volumeTradeReviewObj = new VolumeTradeReview('volume-trade-distribution.txt');
+    $dataArr = $volumeTradeReviewObj->getData();
 
-$tmsObj = new TrueMarketSentiment('true-market-sentiment.txt');
-$dataArrTMS = $tmsObj->getChartDataForTrueMarketSentiment();
-$dataTMSStatus = $tmsObj->getTrueMarketSentimentStatus();
-$dataTMSBrokersStats = $tmsObj->getTrueMarketSentiment();
+    $tmsObj = new TrueMarketSentiment('true-market-sentiment.txt');
+    $dataArrTMS = $tmsObj->getChartDataForTrueMarketSentiment();
+    $dataTMSStatus = $tmsObj->getTrueMarketSentimentStatus();
+    $dataTMSBrokersStats = $tmsObj->getTrueMarketSentiment();
 
-$dataPointsVol = $volumeTradeReviewObj->getChartDataForVolumeDistribution();
-$dataPointsTrade = $volumeTradeReviewObj->getChartDataForTradeDistribution();
-$dataArrBuySellMid = $volumeTradeReviewObj->getChartDataForBuyUpSellDownMidPriceDistribution();
-$dataBuyUpArr = $dataArrBuySellMid['buyup'];
-$dataSellDownArr = $dataArrBuySellMid['selldown'];
-$dataMidPriceArr = $dataArrBuySellMid['midprice'];
-$dataTMSTotalValue = $dataArrTMS['total_value'];
-$dataTMSNetValue = $dataArrTMS['net_value'];
-
+    $dataPointsVol = $volumeTradeReviewObj->getChartDataForVolumeDistribution();
+    $dataPointsTrade = $volumeTradeReviewObj->getChartDataForTradeDistribution();
+    $dataArrBuySellMid = $volumeTradeReviewObj->getChartDataForBuyUpSellDownMidPriceDistribution();
+    $dataBuyUpArr = $dataArrBuySellMid['buyup'];
+    $dataSellDownArr = $dataArrBuySellMid['selldown'];
+    $dataMidPriceArr = $dataArrBuySellMid['midprice'];
+    $dataTMSTotalValue = $dataArrTMS['total_value'];
+    $dataTMSNetValue = $dataArrTMS['net_value'];
 ?>
 
-<!DOCTYPE HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-    <style>
-        #div2 {
-            padding-top: 20px;
-        }
-    </style>
-    <script>
-        window.onload = function() {
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script>
+            window.onload = function() {
 
-            var chartVol = new CanvasJS.Chart("chartContainerVol", {
-                backgroundColor: "#042439",
-                animationEnabled: true,
-                exportEnabled: true,
-                zoomEnabled: true,
-                title:{
-                    text: "Volume Distribution",
-                    fontSize: 16,
-                    fontColor: "white"
-                },
-                axisX:{
-                    interval: 1,
-                    labelFontSize: 12,
-                    labelFontColor: "white"
-                },
-                axisY: {
-                    suffix:  "%",
-                    labelFontSize: 12,
-                    labelFontColor: "white",
-                    minimum: 0,
-                    gridThickness: 0
-                },
-                data: [{
-                    type: "bar",
-                    color: "#A1D97D",
-                    indexLabelFontSize: 12,
-                    yValueFormatString: "##.#0 '%'",
-                    indexLabel: "{y}",
-                    indexLabelPlacement: "auto",
-                    indexLabelFontWeight: "bolder",
-                    indexLabelFontColor: "white",
-                    dataPoints: <?php echo json_encode($dataPointsVol, JSON_NUMERIC_CHECK); ?>
-                }]
-            });
-
-            var chartTrade = new CanvasJS.Chart("chartContainerTrade", {
-                backgroundColor: "#042439",
-                animationEnabled: true,
-                exportEnabled: true,
-                zoomEnabled: true,
-                title:{
-                    text: "Trade Distribution",
-                    fontSize: 16,
-                    fontColor: "white"
-                },
-                axisX:{
-                    interval: 1,
-                    labelFontSize: 12,
-                    labelFontColor: "white"
-                },
-                axisY: {
-                    suffix:  "%",
-                    labelFontSize: 12,
-                    labelFontColor: "white",
-                    minimum: 0,
-                    gridThickness: 0
-                },
-                data: [{
-                    type: "bar",
-                    color: "#A1D97D",
-                    indexLabelFontSize: 12,
-                    yValueFormatString: "##.#0 '%'",
-                    indexLabel: "{y}",
-                    indexLabelPlacement: "auto",
-                    indexLabelFontWeight: "bolder",
-                    indexLabelFontColor: "white",
-                    dataPoints: <?php echo json_encode($dataPointsTrade, JSON_NUMERIC_CHECK); ?>
-                }]
-            });
-
-            var chartBuyMidSell = new CanvasJS.Chart("chartContainerBuyMidSell", {
-                backgroundColor: "#042439",
-                animationEnabled: true,
-                exportEnabled: true,
-                zoomEnabled: true,
-                theme: "light1", // "light1", "light2", "dark1", "dark2"
-                title:{
-                    text: "Buy Up, Mid Price and Sell Distribution (Volume)",
-                    fontSize: 16,
-                    fontColor: "white"
-                },
-                axisX:{
-                    reversed: true,
-                    interval: 1,
-                    labelFontSize: 12,
-                    labelFontColor: "white"
-                },
-                axisY: {
-                    labelFontSize: 12,
-                    labelFontColor: "white",
-                    minimum: 0
-                },
-                toolTip:{
-                    shared: true
-                },
-                data: [{
-                    type: "stackedBar",
-                    name: "Buy Up",
-                    color: "#66A360",
-                    labelFontSize: 12,
-                    dataPoints: <?php echo json_encode($dataBuyUpArr, JSON_NUMERIC_CHECK); ?>
-                },{
-                    type: "stackedBar",
-                    name: "Mid Price",
-                    color: "white",
-                    labelFontSize: 12,
-                    dataPoints: <?php echo json_encode($dataMidPriceArr, JSON_NUMERIC_CHECK); ?>
-                },{
-                    type: "stackedBar",
-                    name: "Sell Down",
-                    color: "#DD4A46",
-                    labelFontSize: 12,
-                    indexLabel: "#total",
-                    indexLabelPlacement: "outside",
-                    indexLabelFontSize: 12,
-                    indexLabelFontWeight: "bold",
-                    indexLabelFontColor: "white",
-                    dataPoints: <?php echo json_encode($dataSellDownArr, JSON_NUMERIC_CHECK); ?>
-                }]
-            });
-
-            var chartTMS = new CanvasJS.Chart("chartContainerTMS", {
-                backgroundColor: "#042439",
-                dataPointWidth: 100,
-                exportEnabled: true,
-                zoomEnabled: true,
-                title: {
-                    text: "Market Sentiment - <?php echo $dataTMSStatus['status']; ?>",
-                    fontSize: 16,
-                    fontColor: "white",
-                    margin: 30
-                },
-                animationEnabled: true,
-                toolTip:{
-                    shared: true,
-                    reversed: true
-                },
-                axisX:{
-                    labelAutoFit: true,
-                    interval: 1,
-                    labelFontSize: 12,
-                    labelFontColor: "white"
-                },
-                axisY: {
-                    title: "",
-                    tickLength: 0,
-                    lineThickness:0,
-                    margin:0,
-                    labelFormatter: function(e) {
-                        return "";
+                var chartTrade = new CanvasJS.Chart("chartContainerTrade", {
+                    backgroundColor: "#F2F2F2",
+                    animationEnabled: true,
+                    exportEnabled: false,
+                    zoomEnabled: true,
+                    title:{
+                        text: "Trade Distribution",
+                        fontSize: 25,
+                        fontColor: "#607D8B",
+                        fontWeight: "normal",
+                        margin: 5,
+                        padding: {
+                            top: 8
+                        }
                     },
-                    gridThickness: 0,
-                    tickLength: 0,
-                    lineThickness: 0
-                },
-                legend: {
-                    fontColor: "white"
-                },
-                data: [
-                    {
-                        type: "stackedColumn100",
-                        name: "Total Value",
-                        color: "#FFFFFF",
-                        showInLegend: false,
-                        indexLabel: "{y}",
+                    axisX:{
+                        interval: 1,
+                        labelFontSize: 12,
+                        labelFontColor: "#091F57",
+                    },
+                    axisY: {
+                        suffix:  "%",
+                        labelFontSize: 12,
+                        labelFontColor: "#091F57",
+                        minimum: 0,
+                        gridThickness: 0
+                    },
+                    data: [{
+                        type: "bar",
+                        color: "#607D8B",
                         indexLabelFontSize: 12,
-                        indexLabelPlacement: "inside",
-                        indexLabelFontWeight: "bolder",
-                        indexLabelFontColor: "black",
-                        dataPoints: <?php echo json_encode($dataTMSTotalValue, JSON_NUMERIC_CHECK); ?>
-                    },{
-                        type: "stackedColumn100",
-                        name: "Net Value",
-                        showInLegend: false,
+                        yValueFormatString: "##.#0 '%'",
                         indexLabel: "{y}",
+                        indexLabelPlacement: "auto",
+                        indexLabelFontColor: "#091F57",
+                        indexLabelBackgroundColor: "#ECEEB9",
+                        indexLabelFontFamily: "tahoma",
+                        dataPoints: <?php echo json_encode($dataPointsTrade, JSON_NUMERIC_CHECK); ?>
+                    }]
+                });
+
+                var chartVol = new CanvasJS.Chart("chartContainerVol", {
+                    backgroundColor: "#F2F2F2",
+                    animationEnabled: true,
+                    exportEnabled: false,
+                    zoomEnabled: true,
+                    title:{
+                        text: "Volume Distribution",
+                        fontSize: 25,
+                        fontColor: "#607D8B",
+                        fontWeight: "normal",
+                        margin: 5,
+                        padding: {
+                            top: 8
+                        }
+                    },
+                    axisX:{
+                        interval: 1,
+                        labelFontSize: 12,
+                        labelFontColor: "#091F57"
+                    },
+                    axisY: {
+                        suffix:  "%",
+                        labelFontSize: 12,
+                        labelFontColor: "#091F57",
+                        minimum: 0,
+                        gridThickness: 0
+                    },
+                    data: [{
+                        type: "bar",
+                        color: "#607D8B",
                         indexLabelFontSize: 12,
-                        indexLabelPlacement: "inside",
-                        indexLabelFontWeight: "bolder",
-                        indexLabelFontColor: "black",
-                        dataPoints: <?php echo json_encode($dataTMSNetValue, JSON_NUMERIC_CHECK); ?>
-                    }
-                ]
-            });
+                        yValueFormatString: "##.#0 '%'",
+                        indexLabel: "{y}",
+                        indexLabelPlacement: "auto",
+                        indexLabelFontColor: "#091F57",
+                        indexLabelBackgroundColor: "#ECEEB9",
+                        indexLabelFontFamily: "tahoma",
+                        dataPoints: <?php echo json_encode($dataPointsVol, JSON_NUMERIC_CHECK); ?>
+                    }]
+                });
 
-            chartVol.render();
-            chartTrade.render();
-            chartTMS.render();
+                var chartTMS = new CanvasJS.Chart("chartContainerTMS", {
+                    backgroundColor: "#F2F2F2",
+                    dataPointWidth: 100,
+                    exportEnabled: false,
+                    zoomEnabled: true,
+                    title: {
+                        text: "True Market Sentiment - <?php echo $dataTMSStatus['status']; ?>",
+                        fontSize: 25,
+                        fontColor: "#607D8B",
+                        fontWeight: "normal",
+                        margin: 50,
+                        padding: {
+                            top: 10
+                        }
+                    },
+                    animationEnabled: true,
+                    toolTip:{
+                        shared: true,
+                        reversed: true
+                    },
+                    axisX:{
+                        labelAutoFit: true,
+                        interval: 1,
+                        labelFontSize: 12,
+                        labelFontColor: "#091F57"
+                    },
+                    axisY: {
+                        title: "",
+                        tickLength: 0,
+                        lineThickness:0,
+                        margin:0,
+                        labelFormatter: function(e) {
+                            return "";
+                        },
+                        gridThickness: 0,
+                        tickLength: 0,
+                        lineThickness: 0
+                    },
+                    data: [
+                        {
+                            type: "stackedColumn100",
+                            name: "Total Value",
+                            color: "#E0DEDE",
+                            showInLegend: false,
+                            indexLabel: "{y}",
+                            indexLabelFontSize: 12,
+                            indexLabelPlacement: "inside",
+                            indexLabelFontColor: "#092057",
+                            indexLabelBackgroundColor: "#ECEEB9",
+                            indexLabelFontFamily: "tahoma",
+                            dataPoints: <?php echo json_encode($dataTMSTotalValue, JSON_NUMERIC_CHECK); ?>
+                        },{
+                            type: "stackedColumn100",
+                            name: "Net Value",
+                            showInLegend: false,
+                            indexLabel: "{y}",
+                            indexLabelFontSize: 12,
+                            indexLabelPlacement: "inside",
+                            indexLabelFontColor: "#092057",
+                            indexLabelBackgroundColor: "#ECEEB9",
+                            indexLabelFontFamily: "tahoma",
+                            dataPoints: <?php echo json_encode($dataTMSNetValue, JSON_NUMERIC_CHECK); ?>
+                        }
+                    ]
+                });
 
-        }
-    </script>
-</head>
-<body style="background:#DCD8BB;">
-<div id="container">
-    <div id="div1">
-        <div id="chartContainerTrade" style="height: 500px; width: 49.6%; float: left;"></div>
-        <div id="chartContainerVol" style="height: 500px; width: 49.6%; float: right;"></div>
-    </div>
-
-    <div id="div2" style="clear: both;">
-        <div id="chartContainerTMS" style="height: 350px; width: 100%;"></div>
-    </div>
-    <table style="width:100%; margin-top:20px;" border=1px cellspacing=0px cellpadding=0px>
-    <tr>
-        <th>&nbsp;</th>
-        <?php
-            foreach($dataTMSBrokersStats as $broker => $stats) 
-            {
-                echo '<th>'.$broker.'</th>';
+                chartVol.render();
+                chartTrade.render();
+                chartTMS.render();
             }
-        ?>
-    </tr>
+        </script>
+        <title>Technical Analysis Tools</title>
+    </head>
+    <body>
+        <div id="container">
+            <div id="div1">
+                <div id="chartContainerTrade"></div>
+                <div id="chartContainerVol"></div>
+            </div>
 
-    <tr>
-        <td colspan=11>&nbsp;</td>
-    </tr>
-
-    <tr>
-        <td>Buying Average</td>
-        <?php
-            // buying average
-            foreach($dataTMSBrokersStats as $broker => $stats) 
-            {
-                echo '<td>'.$stats['buying_average'].'</td>';
-            }
-        ?>
-    </tr>
-
-    <tr>
-        <td>Selling Average</td>
-        <?php
-            // selling average
-            foreach($dataTMSBrokersStats as $broker => $stats) 
-            {
-                echo '<td>'.$stats['selling_average'].'</td>';
-            }
-        ?>
-    </tr>
-
-    <tr>
-        <td colspan=11>&nbsp;</td>
-    </tr>
-
-    <tr>
-        <td>Total Value</td>
-        <?php
-            // total value
-            foreach($dataTMSBrokersStats as $broker => $stats) 
-            {
-                echo '<td>'.number_format($stats['total_value']).'</td>';
-            }
-        ?>
-    </tr>
-
-    <tr>
-        <td>Net Value</td>
-        <?php
-            // net value
-            foreach($dataTMSBrokersStats as $broker => $stats) 
-            {
-                echo '<td>'.number_format($stats['net_value']).'</td>';
-            }
-        ?>
-    </tr>
-
-    </table>
-
-    <?php
-        echo "<pre>";
-        print_r($dataTMSStatus);
-        echo "</pre>";
-    ?>
-</div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-</body>
+            <div id="div2">
+                <div id="chartContainerTMS"></div>
+            </div>
+        </div>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </body>
 </html>

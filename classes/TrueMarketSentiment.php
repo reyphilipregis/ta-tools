@@ -101,7 +101,7 @@ final class TrueMarketSentiment
         $top10BrokersTMS = array_slice($this->getTrueMarketSentiment(), 0, self::MAX_NUM_BROKERS);
         foreach ($top10BrokersTMS as $broker => $arrData) {
             $data['net_value'][$counter] = [
-                'color' => ($arrData['net_value'] > 0) ? '#66A360' : '#DD4A47',
+                'color' => ($arrData['net_value'] > 0) ? '#006600' : '#B70016',
                 'label' => $broker,
                 'y' => $arrData['net_value']
             ];
