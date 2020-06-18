@@ -59,7 +59,7 @@ final class TrueMarketSentiment
      *
      * @return mixed[]
      */
-    public function getAllBrokers()
+    public function getAllBrokers(): array
     {
         $brokers = array_keys(
             array_merge(
@@ -77,7 +77,7 @@ final class TrueMarketSentiment
      *
      * @return mixed[]
      */
-    public function getAllBrokersWithTotalValue()
+    public function getAllBrokersWithTotalValue(): array
     {
         $data = [];
         $brokers = $this->getAllBrokers();
@@ -94,7 +94,7 @@ final class TrueMarketSentiment
      *
      * @return mixed[]
      */
-    public function getChartDataForTrueMarketSentiment()
+    public function getChartDataForTrueMarketSentiment(): array
     {
         $counter = 0;
         $data = [];
@@ -122,7 +122,7 @@ final class TrueMarketSentiment
      *
      * @return mixed[]
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->dataArr;
     }
@@ -132,7 +132,7 @@ final class TrueMarketSentiment
      *
      * @return mixed[]
      */
-    public function getStats()
+    public function getStats(): array
     {
         $numBrokersGreenBar = 0;
         $nmHighBuyAvgThnSell = 0;
@@ -170,7 +170,7 @@ final class TrueMarketSentiment
      *
      * @return int
      */
-    public function getTotalValueByStatus($status)
+    public function getTotalValueByStatus($status): int
     {
         return $this->getSumFromAssocArray($status, self::VALUE);
     }
@@ -182,7 +182,7 @@ final class TrueMarketSentiment
      *
      * @return int
      */
-    public function getTotalVolumeByStatus($status)
+    public function getTotalVolumeByStatus($status): int
     {
         return $this->getSumFromAssocArray($status, self::VOLUME);
     }
@@ -192,7 +192,7 @@ final class TrueMarketSentiment
      *
      * @return mixed[]
      */
-    public function getTrueMarketSentiment()
+    public function getTrueMarketSentiment(): array
     {
         $data = [];
         $brokers = array_slice($this->getAllBrokersWithTotalValue(), 0, self::MAX_NUM_BROKERS);
@@ -238,9 +238,9 @@ final class TrueMarketSentiment
     /**
      * Get the true market sentiment status.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function getTrueMarketSentimentStatus()
+    public function getTrueMarketSentimentStatus(): array
     {
         $status = self::STATUS_NEUTRAL;
         $stats = $this->getStats();
@@ -283,7 +283,7 @@ final class TrueMarketSentiment
      *
      * @return int
      */
-    private function convertIntWithCommaToIntWithNoComma($value)
+    private function convertIntWithCommaToIntWithNoComma($value): int
     {
         return (int)str_replace(',', '', $value);
     }
@@ -295,7 +295,7 @@ final class TrueMarketSentiment
      *
      * @return mixed[]
      */
-    private function getDataFromFile($filename)
+    private function getDataFromFile($filename): array
     {
         $filePointer = fopen($filename, 'rb');
         $status = 'buyers';
@@ -325,7 +325,7 @@ final class TrueMarketSentiment
      *
      * @return int
      */
-    private function getSumFromAssocArray($status, $key)
+    private function getSumFromAssocArray($status, $key): int
     {
         $total = 0;
         $data = $this->getData();
@@ -343,7 +343,7 @@ final class TrueMarketSentiment
      *
      * @return float
      */
-    private function getTotalValuePerBroker($broker)
+    private function getTotalValuePerBroker($broker): float
     {
         $buyerValue = 0;
         $sellerValue = 0;

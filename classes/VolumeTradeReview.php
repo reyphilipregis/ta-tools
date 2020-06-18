@@ -34,7 +34,7 @@ final class VolumeTradeReview
      *
      * @return mixed[]
      */
-    public function getChartDataForBuyUpSellDownMidPriceDistribution()
+    public function getChartDataForBuyUpSellDownMidPriceDistribution(): array
     {
         $data = [];
         $counter = 0;
@@ -69,7 +69,7 @@ final class VolumeTradeReview
      *
      * @return mixed[]
      */
-    public function getChartDataForTradeDistribution()
+    public function getChartDataForTradeDistribution(): array
     {
         $data = [];
         $totalNumberOfTrades = $this->getTotalTNumberOfTrades();
@@ -94,7 +94,7 @@ final class VolumeTradeReview
      *
      * @return mixed[]
      */
-    public function getChartDataForVolumeDistribution()
+    public function getChartDataForVolumeDistribution(): array
     {
         $data = [];
         $totalVolume = $this->getTotalVolumeTraded();
@@ -118,7 +118,7 @@ final class VolumeTradeReview
      *
      * @return mixed[]
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->dataArr;
     }
@@ -128,7 +128,7 @@ final class VolumeTradeReview
      *
      * @return int
      */
-    public function getTotalBuyUp()
+    public function getTotalBuyUp(): int
     {
         return $this->getSumFromAssocArray(self::BUYUP);
     }
@@ -148,7 +148,7 @@ final class VolumeTradeReview
      *
      * @return int
      */
-    public function getTotalSellDown()
+    public function getTotalSellDown(): int
     {
         return $this->getSumFromAssocArray(self::SELLDOWN);
     }
@@ -158,7 +158,7 @@ final class VolumeTradeReview
      *
      * @return int
      */
-    public function getTotalTNumberOfTrades()
+    public function getTotalTNumberOfTrades(): int
     {
         return $this->getSumFromAssocArray(self::TRADES);
     }
@@ -168,7 +168,7 @@ final class VolumeTradeReview
      *
      * @return int
      */
-    public function getTotalVolumeTraded()
+    public function getTotalVolumeTraded(): int
     {
         return $this->getSumFromAssocArray(self::VOLUMETRADED);
     }
@@ -178,7 +178,7 @@ final class VolumeTradeReview
      *
      * @return mixed[]
      */
-    public function getTradeDistribution()
+    public function getTradeDistribution(): array
     {
         $data = [];
         $totalNumberOfTrades = $this->getTotalTNumberOfTrades();
@@ -196,7 +196,7 @@ final class VolumeTradeReview
      *
      * @return mixed[]
      */
-    public function getVolumeAndTradeDistribution()
+    public function getVolumeAndTradeDistribution(): array
     {
         $data = [];
         $totalVolume = $this->getTotalVolumeTraded();
@@ -221,7 +221,7 @@ final class VolumeTradeReview
      *
      * @return mixed[]
      */
-    public function getVolumeDistribution()
+    public function getVolumeDistribution(): array
     {
         $data = [];
         $totalVolume = $this->getTotalVolumeTraded();
@@ -253,7 +253,7 @@ final class VolumeTradeReview
      *
      * @return int
      */
-    private function convertIntWithCommatoIntWithNoComma($value)
+    private function convertIntWithCommatoIntWithNoComma($value): int
     {
         return (int)str_replace(',', '', $value);
     }
@@ -265,7 +265,7 @@ final class VolumeTradeReview
      *
      * @return mixed[]
      */
-    private function getDataFromFile($filename)
+    private function getDataFromFile($filename): array
     {
         $filePointer = fopen($filename, 'rb');
         while (!feof($filePointer)) {
@@ -287,7 +287,7 @@ final class VolumeTradeReview
      *
      * @return int
      */
-    private function getSumFromAssocArray($key)
+    private function getSumFromAssocArray($key): int
     {
         $total = 0;
         foreach ($this->getData() as $keyData) {
