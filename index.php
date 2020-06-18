@@ -113,7 +113,7 @@
 
                 var chartTMS = new CanvasJS.Chart("chartContainerTMS", {
                     backgroundColor: "#F2F2F2",
-                    dataPointWidth: 100,
+                    dataPointWidth: 90,
                     exportEnabled: false,
                     zoomEnabled: true,
                     title: {
@@ -153,7 +153,7 @@
                         {
                             type: "stackedColumn100",
                             name: "Total Value",
-                            color: "#E0DEDE",
+                            color: "#c9c9c7",
                             showInLegend: false,
                             indexLabel: "{y}",
                             indexLabelFontSize: 12,
