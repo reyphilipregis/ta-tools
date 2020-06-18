@@ -3,11 +3,12 @@
 
     require __DIR__.'/classes/TrueMarketSentiment.php';
     require __DIR__.'/classes/VolumeTradeReview.php';
+    require __DIR__.'/config/config.php';
     
-    $volumeTradeReviewObj = new VolumeTradeReview('volume-trade-distribution.txt');
+    $volumeTradeReviewObj = new VolumeTradeReview($config['TVD_FILE']);
     $dataArr = $volumeTradeReviewObj->getData();
 
-    $tmsObj = new TrueMarketSentiment('true-market-sentiment.txt');
+    $tmsObj = new TrueMarketSentiment($config['TMS_FILE']);
     $dataArrTMS = $tmsObj->getChartDataForTrueMarketSentiment();
     $dataTMSStatus = $tmsObj->getTrueMarketSentimentStatus();
     $dataTMSBrokersStats = $tmsObj->getTrueMarketSentiment();
