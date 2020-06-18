@@ -3,7 +3,7 @@
 
     require __DIR__.'/classes/TrueMarketSentiment.php';
     require __DIR__.'/classes/VolumeTradeReview.php';
-
+    
     $volumeTradeReviewObj = new VolumeTradeReview('volume-trade-distribution.txt');
     $dataArr = $volumeTradeReviewObj->getData();
 
