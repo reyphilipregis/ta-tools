@@ -31,14 +31,14 @@
             window.onload = function() {
 
                 var chartTrade = new CanvasJS.Chart("chartContainerTrade", {
-                    backgroundColor: "#F2F2F2",
+                    backgroundColor: "#F7F7F7",
                     animationEnabled: true,
                     exportEnabled: false,
                     zoomEnabled: true,
                     title:{
                         text: "Trade Distribution",
-                        fontSize: 25,
-                        fontColor: "#6B86B1",
+                        fontSize: 35,
+                        fontColor: "#29464B",
                         fontWeight: "normal",
                         margin: 5,
                         padding: {
@@ -47,39 +47,39 @@
                     },
                     axisX:{
                         interval: 1,
-                        labelFontSize: 12,
+                        labelFontSize: 20,
                         labelFontColor: "#091F57",
                     },
                     axisY: {
                         suffix:  "%",
-                        labelFontSize: 12,
-                        labelFontColor: "#091F57",
+                        labelFontSize: 20,
+                        labelFontColor: "#091540",
                         minimum: 0,
                         gridThickness: 0
                     },
                     data: [{
                         type: "bar",
-                        color: "#6B86B1",
-                        indexLabelFontSize: 12,
+                        color: "#25A044",
+                        indexLabelFontSize: 20,
                         yValueFormatString: "##.#0 '%'",
                         indexLabel: "{y}",
                         indexLabelPlacement: "auto",
-                        indexLabelFontColor: "#091F57",
-                        indexLabelBackgroundColor: "#A5D2A5",
+                        indexLabelFontColor: "#000000",
+                        indexLabelBackgroundColor: "#FEE45E",
                         indexLabelFontFamily: "tahoma",
                         dataPoints: <?php echo json_encode($dataPointsTrade, JSON_NUMERIC_CHECK); ?>
                     }]
                 });
 
                 var chartVol = new CanvasJS.Chart("chartContainerVol", {
-                    backgroundColor: "#F2F2F2",
+                    backgroundColor: "#F7F7F7",
                     animationEnabled: true,
                     exportEnabled: false,
                     zoomEnabled: true,
                     title:{
                         text: "Volume Distribution",
-                        fontSize: 25,
-                        fontColor: "#6B86B1",
+                        fontSize: 35,
+                        fontColor: "#29464B",
                         fontWeight: "normal",
                         margin: 5,
                         padding: {
@@ -88,43 +88,43 @@
                     },
                     axisX:{
                         interval: 1,
-                        labelFontSize: 12,
+                        labelFontSize: 20,
                         labelFontColor: "#091F57"
                     },
                     axisY: {
                         suffix:  "%",
-                        labelFontSize: 12,
-                        labelFontColor: "#091F57",
+                        labelFontSize: 20,
+                        labelFontColor: "#091540",
                         minimum: 0,
                         gridThickness: 0
                     },
                     data: [{
                         type: "bar",
-                        color: "#6B86B1",
-                        indexLabelFontSize: 12,
+                        color: "#25A044",
+                        indexLabelFontSize: 20,
                         yValueFormatString: "##.#0 '%'",
                         indexLabel: "{y}",
                         indexLabelPlacement: "auto",
-                        indexLabelFontColor: "#091F57",
-                        indexLabelBackgroundColor: "#A5D2A5",
+                        indexLabelFontColor: "#000000",
+                        indexLabelBackgroundColor: "#FEE45E",
                         indexLabelFontFamily: "tahoma",
                         dataPoints: <?php echo json_encode($dataPointsVol, JSON_NUMERIC_CHECK); ?>
                     }]
                 });
 
                 var chartTMS = new CanvasJS.Chart("chartContainerTMS", {
-                    backgroundColor: "#F2F2F2",
-                    dataPointWidth: 90,
+                    backgroundColor: "#F7F7F7",
+                    dataPointWidth: 160,
                     exportEnabled: false,
                     zoomEnabled: true,
                     title: {
                         text: "True Market Sentiment - <?php echo $dataTMSStatus['status']; ?>",
-                        fontSize: 25,
-                        fontColor: "#6B86B1",
+                        fontSize: 35,
+                        fontColor: "#29464B",
                         fontWeight: "normal",
                         margin: 50,
                         padding: {
-                            top: 10
+                            top: 8
                         }
                     },
                     animationEnabled: true,
@@ -133,11 +133,11 @@
                         reversed: true
                     },
                     axisX:{
-                        labelMaxWidth: 80,
+                        labelMaxWidth: 150,
 			            labelWrap: true,
                         labelAutoFit: true,
                         interval: 1,
-                        labelFontSize: 12,
+                        labelFontSize: 22,
                         labelFontColor: "#091F57"
                     },
                     axisY: {
@@ -156,13 +156,13 @@
                         {
                             type: "stackedColumn100",
                             name: "Total Value",
-                            color: "#c9c9c7",
+                            color: "#E2E2E2",
                             showInLegend: false,
                             indexLabel: "{y}",
-                            indexLabelFontSize: 12,
+                            indexLabelFontSize: 22,
                             indexLabelPlacement: "inside",
                             indexLabelFontColor: "#092057",
-                            indexLabelBackgroundColor: "#A5D2A5",
+                            indexLabelBackgroundColor: "#FEE45E",
                             indexLabelFontFamily: "tahoma",
                             dataPoints: <?php echo json_encode($dataTMSTotalValue, JSON_NUMERIC_CHECK); ?>
                         },{
@@ -170,10 +170,10 @@
                             name: "Net Value",
                             showInLegend: false,
                             indexLabel: "{y}",
-                            indexLabelFontSize: 12,
+                            indexLabelFontSize: 22,
                             indexLabelPlacement: "inside",
                             indexLabelFontColor: "#092057",
-                            indexLabelBackgroundColor: "#A5D2A5",
+                            indexLabelBackgroundColor: "#FEE45E",
                             indexLabelFontFamily: "tahoma",
                             dataPoints: <?php echo json_encode($dataTMSNetValue, JSON_NUMERIC_CHECK); ?>
                         }

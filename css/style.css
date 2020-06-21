@@ -3,32 +3,29 @@ body {
     color: #091F57;
 }
 
-#container {
-    width: 85%; 
-    margin: auto;
-}
-
 #chartContainerTMS {
-    height: 500px; 
-    width: 99.7%; 
-    border: 1px solid #FFFFFF;
+    height: 910px;
+    border: 1px solid #020202;
+    border-right: 1px solid #020202;
 }
 
 #chartContainerTrade {
-    height: 800px; 
+    height: 910px; 
     width: 49.5%; 
     float: left; 
-    border: 1px solid #E5E5E5;
+    border: 1px solid #000000;
+    border-right: 1px solid #020202;
 }
 
 #chartContainerVol {
-    height: 800px; 
+    height: 910px; 
     width: 49.5%; 
     float: right; 
-    border: 1px solid #E5E5E5;
+    border: 1px solid #000000;
+    border-right: 1px solid #020202;
 }
 
 #div2 {
-    padding-top: 10px;
+    padding-top: 20px;
     clear: both;
 }
