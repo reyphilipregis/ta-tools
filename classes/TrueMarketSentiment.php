@@ -1,5 +1,7 @@
 <?php
 
+require 'Broker.php';
+
 final class TrueMarketSentiment
 {
     CONST AVERAGE = 3;
@@ -23,6 +25,11 @@ final class TrueMarketSentiment
     CONST VOLUME = 1;
 
     CONST WEIGHT = 4;
+
+    /**
+     * @var $broker
+     */
+    private $broker;
 
     /**
      * @var $dataArr
@@ -51,6 +58,7 @@ final class TrueMarketSentiment
      */
     public function __construct($filename)
     {
+        $this->broker = new Broker();
         $this->setData($this->getDataFromFile($filename));
     }
 
@@ -101,13 +109,13 @@ final class TrueMarketSentiment
         $top10BrokersTMS = array_slice($this->getTrueMarketSentiment(), 0, self::MAX_NUM_BROKERS);
         foreach ($top10BrokersTMS as $broker => $arrData) {
             $data['net_value'][$counter] = [
-                'color' => ($arrData['net_value'] > 0) ? '#006600' : '#B70016',
-                'label' => $broker,
+                'color' => ($arrData['net_value'] > 0) ? '#146600' : '#B70016',
+                'label' => $this->broker->getBroker($broker),
                 'y' => $arrData['net_value']
             ];
 
             $data['total_value'][$counter] = [
-                'label' => $broker,
+                'label' => $this->broker->getBroker($broker),
                 'y' => $arrData['total_value']
             ];
 

@@ -1,0 +1,156 @@
+<?php
+
+final class Broker
+{
+    private $brokers = [
+        'CSUISSE' => 'Credit Suisse Securities (Phils.), Inc.',
+        'CLSA' => 'CLSA Philippines, Inc.',
+        'UBS' => 'UBS Securities Philippines Inc.',
+        'UBS Securities Philippines Inc.' => 'JP Morgan Securities (Phils.), Inc.',
+        'JPMORGAN' => 'JP Morgan Securities (Phils.), Inc.',
+        'COL' => 'Citiseconline.com., Inc.',
+        'AURORA' => 'Aurora Securities, Inc.',
+        'SALISBUR' => 'Salisbury BKT Securities Corporation',
+        'MACQUAR' => 'Macquarie Securities Limited',
+        'MAYBANK' => 'Maybank ATR Kim Eng Securities, Inc.',
+        'SB-EQTY' => 'SB-Equities, Inc.',
+        'TIMSON' => 'Timson Securities, Inc.',
+        'DBP-DWA' => 'DBP-Daiwa Capital Markets Phils., Inc.',
+        'BPI' => 'BPI Securities Corp.',
+        'MANDARIN' => 'Mandarin Securities Corp.',
+        'FMS' => 'First Metro Securities Brokerage Corp.',
+        'PEP' => 'Philippine Equity Partners, Inc.',
+        'WEALTH' => 'Wealth Securities, Inc.',
+        'ABACUS' => 'Abacus Securities Corp.',
+        'REGIS' => 'Regis Partners, Inc.',
+        'BDO' => 'BDO Securities Corp.',
+        'R_NUBLA' => 'R. Nubla Securities, Inc.',
+        'BDONOM' => 'BDO Nomura Securities, Inc.',
+        'F_YAP' => 'F. Yap Securities, Inc.',
+        'ASIASEC' => 'Asiasec Equities, Inc.',
+        'PAPA' => 'Papa Securities Corp.',
+        'APS' => 'AP Securities, Incorporated',
+        'STARALL' => 'Star Alliance Securities Corp.',
+        'RCBC' => 'RCBC Securities, Inc.',
+        'UNICAP' => 'Unicapital Securities, Inc.',
+        'AAA' => 'AAA Southeast Equities, Inc.',
+        'TOWER' => 'Tower Securities, Inc.',
+        'CITISEC' => 'Citisecurities, Inc.',
+        'PHLSTOCK' => 'Philstocks Financial, Inc.',
+        'A_AND_A' => 'A & A Securities, Inc.',
+        'FIRSTRES' => 'The First Res. Management & Sec. Corp.',
+        'LUY\'s' => 'Luy\'s Securities Co., Inc.',
+        'FIDELITY' => 'Fidelity Securities, Inc.',
+        'PNB' => 'PNB Securities, Inc.',
+        'ABCAPSEC' => 'AB Capital Securities, Inc.',
+        'ASTRA' => 'Astra Securities Corp.',
+        'SUN' => 'Sun Securities, Inc.',
+        'SUMMIT' => 'Summit Securities, Inc.',
+        'CHIBSEC' => 'China Bank Securities Corporation',
+        'BERNARD' => 'Bernad Securities, Inc.',
+        'HDI' => 'HDI Securities, Inc.',
+        'REGINA' => 'Regina Capital Development Corp.',
+        'EASTERN' => 'Eastern Securities Dev\'t. Corp.',
+        'GOLDSTAR' => 'Goldstar Securities, Inc.',
+        'QUALITY' => 'Quality Investment & Securities Corp.',
+        'MRCNTILE' => 'Mercantile Securities Corp.',
+        'MTPEAK' => 'Mount Peak Securities, Inc.',
+        'BA' => 'BA Securities, Inc.',
+        'INVESTOR' => 'Investors Securities, Inc.',
+        'LUCKY' => 'Lucky Securities, Inc.',
+        'NEW_WRLD' => 'New World Securities, Inc.',
+        'DAMARKET' => 'DA Market Securities, Inc.',
+        'G_LINK' => 'Globalink Securities & Stocks, Inc.',
+        'VALUEQST' => 'Value Quest Securities Corp.',
+        'SOLAR' => 'Solar Securities, Inc.',
+        'BELSON' => 'Belson Securities, Inc.',
+        'ANSALDO' => 'Ansaldo, Godinez & Company, Inc.',
+        'TRITON' => 'Triton Securities Corp.',
+        'YU' => 'Yu & Company, Inc.',
+        'IGC' => 'IGC Securities, Inc.',
+        'IMPERIAL' => 'Imperial de Guzman, Abalos & Co., Inc.',
+        'DAVID_GO' => 'David Go Securities Corp.',
+        'EAGLE' => 'Eagle Equities, Inc.',
+        'STANDARD' => 'Standard Securities Corp.',
+        'F_ORIENT' => 'First Orient Securities, Inc.',
+        'UCPB' => 'UCPB Securities, Inc.',
+        'STRATEQ' => 'Strategic Equities Corp.',
+        'EQWORLD' => 'Equitiworld Securities, Inc.',
+        'SJ_ROXAS' => 'S. J. Roxas & Company, Inc.',
+        'CAMPOS' => 'Campos, Lanuza & Company, Inc.',
+        'S_SPCLST' => 'Securities Specialists, Inc.',
+        'E_CHUA' => 'E. Chua Chiaco Securities, Inc.',
+        'WESTLINK' => 'Westlink Global Equities, Inc.',
+        'MERIDIAN' => 'Meridian Securities, Inc.',
+        'EVERGRN' => 'Evergreen Stock Brokerage & Sec., Inc',
+        'PREMIUM' => 'Premium Securities, Inc.',
+        'BENNETT' => 'H. E. Bennett Securities, Inc.',
+        'UPCC' => 'UPCC Securities Corporation',
+        'MARIAN' => 'Marian Securities, Inc.',
+        'JSG' => 'JSG Securities, Inc.',
+        'PAN_ASIA' => 'Pan Asia Securities Corp.',
+        'PLATINUM' => 'Platinum Securities, Inc.',
+        'ATCASTRO' => 'A. T. de Castro Securities Corp.',
+        'WONG' => 'Wong Securities Corp.',
+        'GUILD' => 'Guild Securities, Inc.',
+        'VENTURE' => 'Venture Securities, Inc.',
+        'BH_CHUA' => 'B.H. Chua Securities Corp.',
+        'MDR' => 'MDR Securities, Inc.',
+        'DVRSFIED' => 'Diversified Securities, Inc.',
+        'RS_LIM' => 'R. S. Lim & Company. Inc.',
+        'KINGS' => 'King\'s Power Securities, Inc.',
+        'COYIUTO' => 'R. Coyiuto Securities, Inc.',
+        'TNSENGCO' => 'Tansengco & Company, Inc.',
+        'SINCERE' => 'Sincere Securities Corporation',
+        'G_TOWER' => 'Golden Tower Sec. & Holdings, Inc.',
+        'YAO' => 'Yao & Zialcita, Inc.',
+        'INTRAINV' => 'Intra-Invest Securities, Inc.',
+        'CUALOPNG' => 'Cualoping Securities Corp.',
+        'LARRGO' => 'Larrgo Securities Company, Inc.',
+        'ALPHA' => 'Alpha Securities Corporation',
+        'OPTIMUM' => 'Optimum Securities Corp.',
+        'GIMENEZ' => 'I. B. Gimenez Securities, Inc.',
+        'COHERCO' => 'Coherco Securities, Inc.',
+        'UOB_KAY' => 'UOB-Kay Hian Sec., Phils., Inc.',
+        'BARCELON' => 'J. M. Barcelon & Company, Inc.',
+        'EASTWEST' => 'Eastwest Capital Corp.',
+        'JAKA' => 'Jaka Securities Corp',
+        'FINCAP' => 'First Integrated Cap. Sec., Inc.',
+        'VCSEC' => 'VC Securities Corporation',
+        'GD_TAN' => 'G. D. Tan & Co., Inc.',
+        'SARNGGNI' => 'Saranggani Securities, Inc.',
+        'ASIA_PAC' => 'Asia Pacific Cap. Equities & Sec. Corp.',
+        'PROGRESS' => 'Phil-Progress Securities Corp.',
+        'LOPEZ' => 'Lopez, Locsin, Ledesma & Co., Inc.',
+        'ARMSTRON' => 'Armstrong Securities, Inc.',
+        'APEX' => 'Apex Phils. Equities Corp.',
+        'TRANASIA' => 'Trans-Asia Securities, Inc.',
+        'RTG' => 'RTG & Company, Inc.',
+        'ALAKOR' => 'Alakor Securities Corp.',
+        'SUPREME' => 'Supreme Stockbroker, Inc.',
+        'TRISTATE' => 'Tri-State Securities, Inc.',
+        'BENJAMIN' => 'Benjamin Co. CA & Company, Inc.'
+    ];
+
+    /**
+     * Broker constructor.
+     */
+    public function __construct()
+    {
+        
+    }
+
+    /**
+     * Get broker by code.
+     *
+     * @param $code
+     * 
+     * @return string
+     */
+    public function getBroker(string $code): string
+    {
+        return $this->brokers[$code] ?? $code;
+    }
+}
+
+?>

@@ -38,7 +38,7 @@
                     title:{
                         text: "Trade Distribution",
                         fontSize: 25,
-                        fontColor: "#607D8B",
+                        fontColor: "#6B86B1",
                         fontWeight: "normal",
                         margin: 5,
                         padding: {
@@ -59,13 +59,13 @@
                     },
                     data: [{
                         type: "bar",
-                        color: "#607D8B",
+                        color: "#6B86B1",
                         indexLabelFontSize: 12,
                         yValueFormatString: "##.#0 '%'",
                         indexLabel: "{y}",
                         indexLabelPlacement: "auto",
                         indexLabelFontColor: "#091F57",
-                        indexLabelBackgroundColor: "#ECEEB9",
+                        indexLabelBackgroundColor: "#A5D2A5",
                         indexLabelFontFamily: "tahoma",
                         dataPoints: <?php echo json_encode($dataPointsTrade, JSON_NUMERIC_CHECK); ?>
                     }]
@@ -79,7 +79,7 @@
                     title:{
                         text: "Volume Distribution",
                         fontSize: 25,
-                        fontColor: "#607D8B",
+                        fontColor: "#6B86B1",
                         fontWeight: "normal",
                         margin: 5,
                         padding: {
@@ -100,13 +100,13 @@
                     },
                     data: [{
                         type: "bar",
-                        color: "#607D8B",
+                        color: "#6B86B1",
                         indexLabelFontSize: 12,
                         yValueFormatString: "##.#0 '%'",
                         indexLabel: "{y}",
                         indexLabelPlacement: "auto",
                         indexLabelFontColor: "#091F57",
-                        indexLabelBackgroundColor: "#ECEEB9",
+                        indexLabelBackgroundColor: "#A5D2A5",
                         indexLabelFontFamily: "tahoma",
                         dataPoints: <?php echo json_encode($dataPointsVol, JSON_NUMERIC_CHECK); ?>
                     }]
@@ -120,7 +120,7 @@
                     title: {
                         text: "True Market Sentiment - <?php echo $dataTMSStatus['status']; ?>",
                         fontSize: 25,
-                        fontColor: "#607D8B",
+                        fontColor: "#6B86B1",
                         fontWeight: "normal",
                         margin: 50,
                         padding: {
@@ -133,6 +133,8 @@
                         reversed: true
                     },
                     axisX:{
+                        labelMaxWidth: 80,
+			            labelWrap: true,
                         labelAutoFit: true,
                         interval: 1,
                         labelFontSize: 12,
@@ -160,7 +162,7 @@
                             indexLabelFontSize: 12,
                             indexLabelPlacement: "inside",
                             indexLabelFontColor: "#092057",
-                            indexLabelBackgroundColor: "#ECEEB9",
+                            indexLabelBackgroundColor: "#A5D2A5",
                             indexLabelFontFamily: "tahoma",
                             dataPoints: <?php echo json_encode($dataTMSTotalValue, JSON_NUMERIC_CHECK); ?>
                         },{
@@ -171,7 +173,7 @@
                             indexLabelFontSize: 12,
                             indexLabelPlacement: "inside",
                             indexLabelFontColor: "#092057",
-                            indexLabelBackgroundColor: "#ECEEB9",
+                            indexLabelBackgroundColor: "#A5D2A5",
                             indexLabelFontFamily: "tahoma",
                             dataPoints: <?php echo json_encode($dataTMSNetValue, JSON_NUMERIC_CHECK); ?>
                         }
